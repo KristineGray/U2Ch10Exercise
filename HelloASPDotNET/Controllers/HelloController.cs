@@ -39,12 +39,24 @@ namespace HelloASPDotNET.Controllers
 
         [HttpGet("welcome/{name?}")]
         [HttpPost]
-        public IActionResult Welcome(string name = "World")
+        public IActionResult Welcome(string name, string language)
         {
-            return Content("<h1>Welcome to my app, " + name + "!</h1>", "text/html");
+            string greeting = CreateMessage(name, language);
+            return Content(greeting, "text/html");
         }
 
-        
+        public static string CreateMessage(string name, string language)
+        {
+            string greeting = "<h1>";
+            if (language == "English") greeting += "Hello";
+            else if (language == "French") greeting += "Bonjour";
+            else if (language == "Spanish") greeting += "Hola";
+            else if (language == "Pashto") greeting += "Salaam";
+            else if (language == "Binary") greeting += "0110100001100101011011000110110001101111";
+            greeting += ", " + name + "!</h1>";
+
+            return greeting;
+        }
 
     }
 }
